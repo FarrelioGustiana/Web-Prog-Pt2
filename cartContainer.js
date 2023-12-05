@@ -12,7 +12,7 @@ addProducts.each(function (index) {
   addBtn.click(function () {
     const name = productsName.eq(index).html();
     const price = productsPrice.eq(index).html();
-    const img = productsImg.eq(i).attr("src");
+    const img = productsImg.eq(index).attr("src");
     let itemFound = false;
 
     shopList.forEach((list) => {
