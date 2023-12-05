@@ -1,4 +1,3 @@
-let username = false;
 // JS FOR SIGN IN FORM
 const signInForm = $("#signIn-form");
 const usernameInput = $("#username");
@@ -121,12 +120,3 @@ forgetPassForm.submit(function (e) {
     alert("Please input your email correctly!");
   }
 });
-
-// PROFILE
-const signInBtn = $(".signIn-button");
-
-if (username) {
-  signInBtn.each(function () {
-    $(this).css("display", "none");
-  });
-}
