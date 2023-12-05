@@ -11,7 +11,7 @@
   font-family: inter;
   color: var(--first);
 }
-
+/* 
 ::-webkit-scrollbar {
   height: 4px;
   width: 8px;
@@ -20,7 +20,7 @@
 ::-webkit-scrollbar-thumb {
   background-color: var(--fourth);
   border-radius: 50px;
-}
+} */
 
 .cart-nums {
   color: var(--third);
@@ -45,4 +45,24 @@
 .active {
   width: 30px !important;
   background-color: white !important;
+}
+
+.categories-container::-webkit-scrollbar {
+  height: 4px;
+  width: 8px;
+}
+
+.categories-container::-webkit-scrollbar-thumb {
+  background-color: var(--fourth);
+  border-radius: 50px;
+}
+
+.recom-card-container::-webkit-scrollbar {
+  height: 4px;
+  width: 8px;
+}
+
+.recom-card-container::-webkit-scrollbar-thumb {
+  background-color: var(--fourth);
+  border-radius: 50px;
 }
