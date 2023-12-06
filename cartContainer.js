@@ -49,7 +49,8 @@ shopList.forEach((list) => {
   console.log(list);
   const { name, price, img, count } = list;
   const card = $(
-    `<div class="shop-card">
+    `
+    <div class="shop-card">
     <label class="text-black text-sm font-bold flex items-center gap-2">
         <div>
             <input type="checkbox" class="ml-3 w-4 h-4 text-indigo-300 border-4">
