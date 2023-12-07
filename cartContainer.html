@@ -25,14 +25,14 @@
 </head>
 
 <body>
-    <header class="relative flex-col-reverse md:flex-col flex duration-1000">
+    <header class="fixed z-10 top-0 left-0 w-full md:relative flex-col-reverse md:flex-col flex duration-1000">
         <!--================= Location =================-->
-        <section class="location px-11 py-1 text-sm bg-[var(--fourth)]" id="location">
+        <section class="location relative px-11 py-1 text-sm bg-[var(--fourth)]" id="location">
             <p>Indonesia, West Java, Bekasi Regency, North Cikarang</p>
         </section>
 
         <!--================= NavBar =================-->
-        <nav class="nav-bar bg-[var(--third)] flex flex-row md:w-full items-center px-11 py-3 md:py-4 gap-2 md:gap-5 h-[90px] justify-between"
+        <nav class="nav-bar relative bg-[var(--third)] flex flex-row md:w-full items-center px-11 py-3 md:py-4 gap-2 md:gap-5 h-[90px] justify-between"
             id="nav-bar">
             <div class="nav-top flex items-center justify-between">
                 <a class="font-bold md:text-xl" href="./main.html">BLUESHOP.COM</a>
@@ -51,7 +51,7 @@
         </nav>
     </header>
 
-    <main class="mx-11 my-5">
+    <main class="mx-11 relative top-[120px] my-5 z-0">
         <section id="shoplist-container">
             <div class="title p-1">
                 <h1 class="text-black font-bold tracking-wider text-2xl">SHOP LIST</h1>
