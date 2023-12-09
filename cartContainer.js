@@ -5,9 +5,15 @@ const addProducts = $(".add-products");
 const productsImg = $(".products");
 const productsName = $(".products-name");
 const productsPrice = $(".products-price span");
+const shopForm = $("#shoplist-container");
+const totalPrice = $("#the-total");
+const totalPriceMD = $("#total-price-md");
+const notifShop = $("#notif-shop");
 
+let totalPriceNum = 0;
 let cartNums = localStorage.getItem("cartNums") || 0;
 cartNumsContainer.html(cartNums);
+let submitShould = true;
 
 addProducts.each(function (index) {
   const addBtn = $(this);
@@ -55,16 +61,61 @@ function showCart() {
     return;
   }
 
-  for (let index = 0; index < shopList.length; index++) {
-    const list = shopList[index];
-    const { name, price, img, count } = list;
+  cartList();
+  const goodsCheck = document.querySelectorAll(".goods-check");
+  goodsCheck.forEach((check) => {
+    check.addEventListener("change", () => {
+      let total = 0;
+      for (i = 0; i < goodsCheck.length; i++) {
+        const { price, count } = shopList[i];
+        if (goodsCheck[i].checked) {
+          const recent = price * count;
+          total += recent;
+        }
+      }
+      totalPriceNum = total;
+      totalPrice.html(totalPriceNum.toFixed(2));
+      totalPriceMD.html(totalPriceNum.toFixed(2));
+    });
+  });
+}
+showCart();
 
+$("body").keypress(function (e) {
+  if (e.key === "e" || e.key === "E") {
+    shopList.length = 0;
+    cartNums = 0;
+    cartNumsContainer.html(cartNums);
+    localStorage.clear();
+    showCart();
+  }
+});
+
+shopForm.submit(function (e) {
+  if (!submitShould) {
+    submitShould = true;
+    e.preventDefault();
+  } else {
+    $("body").addClass("overflow-hidden");
+    notifShop.removeClass("hidden");
+    e.preventDefault();
+  }
+});
+
+$("#close-notif").click(function () {
+  $("body").removeClass("overflow-hidden");
+  notifShop.addClass("hidden");
+});
+
+function cartList() {
+  shopList.forEach((list, index) => {
+    const { name, price, img, count } = list;
     const card = $(
       `
 <div class="shop-card">
     <label class="text-black text-sm font-bold flex items-center gap-2">
         <div>
-            <input type="checkbox" class="ml-3 w-4 h-4 text-indigo-300 border-4">
+            <input type="checkbox" class="goods-check ml-3 w-4 h-4 text-indigo-300 border-4">
         </div>
 
         <div>
@@ -105,40 +156,51 @@ function showCart() {
 </div>`
     );
     shopCardContainer.append(card);
+
     const showCount = $(".count-nums").eq(index);
     const plusBtn = $(".plus-button").eq(index);
     const minuBtn = $(".minus-button").eq(index);
+    const goodsCheck = $(".goods-check").eq(index);
 
     plusBtn.click(function () {
+      submitShould = false;
       list.count++;
       cartNums++;
       cartNumsContainer.html(cartNums);
       showCount.html(list.count);
       localStorage.setItem("shopList", JSON.stringify(shopList));
       localStorage.setItem("cartNums", JSON.stringify(cartNums));
+      if (goodsCheck.prop("checked")) {
+        totalPriceNum += parseFloat(list.price);
+        totalPrice.html(totalPriceNum.toFixed(2));
+        totalPriceMD.html(totalPriceNum.toFixed(2));
+      }
     });
 
     minuBtn.click(function () {
+      submitShould = false;
       list.count--;
       cartNums--;
-      console.log(shopList);
       cartNumsContainer.html(cartNums);
       showCount.html(list.count);
+
+      if (goodsCheck.prop("checked")) {
+        totalPriceNum -= parseFloat(list.price);
+        totalPrice.html(totalPriceNum.toFixed(2));
+        totalPriceMD.html(totalPriceNum.toFixed(2));
+      }
 
       if (list.count <= 0) {
         shopList.splice(index, 1);
         card.remove();
+        totalPriceNum = 0;
+        totalPrice.html(totalPriceNum.toFixed(2));
+        totalPriceMD.html(totalPriceNum.toFixed(2));
         showCart();
       }
 
       localStorage.setItem("shopList", JSON.stringify(shopList));
       localStorage.setItem("cartNums", JSON.stringify(cartNums));
     });
-  }
+  });
 }
-showCart();
-
-window.addEventListener("keypress", (e) => {
-  if (e.key === "e") localStorage.clear();
-  showCart();
-});

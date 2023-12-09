@@ -66,3 +66,14 @@
   background-color: var(--fourth);
   border-radius: 50px;
 }
+
+.shop-card-container::-webkit-scrollbar {
+  height: 4px;
+  width: 8px;
+}
+
+.shop-card-container::-webkit-scrollbar-thumb {
+  background-color: var(--fourth);
+  border-radius: 50px;
+}
+
