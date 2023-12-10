@@ -20,7 +20,7 @@
     <title>Store</title>
 </head>
 
-<body>
+<body class="relative">
 <header class="relative flex-col-reverse md:flex-col flex duration-1000">
     <!--================= Location =================-->
     <section class="location px-11 py-1 text-sm bg-[var(--fourth)]" id="location">
@@ -383,9 +383,17 @@
     </section>
 </main>
 
-<footer class="px-11 py-1 w-full mt-7 relative flex items-end justify-center bottom-0 left-0 h-[200px] bg-[var(--fourth)]">
-    <p class="text-slate-300 text-sm">© 2020-2023, blueshop.com, Inc. or its affiliates</p>
+<footer class="px-11 py-1 w-full mt-7 relative flex flex-col items-center justify-end bottom-0 gap-5 left-0 h-[100px] bg-[var(--fourth)]">
+
+    <div class="flex gap-4">
+        <p class="underline text-slate-200 text-sm">About</p>
+        <a href="./contactUs.html" class="underline text-slate-200 text-sm">Contact Us</a>
+    </div>
+
+    <p class="text-slate-200 text-sm">© 2020-2023, blueshop.com, Inc. or its affiliates</p>
 </footer>
+
+
 
 <script src="slide.js"></script>
 <script src="cartContainer.js"></script>

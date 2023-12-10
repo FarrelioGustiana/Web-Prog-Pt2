@@ -88,6 +88,12 @@ showCart();
 
 $("body").keypress(function (e) {
   if (e.key === "e" || e.key === "E") {
+    totalGoods = 0;
+    totalPriceNum = 0;
+
+    goodsNums.html(totalGoods);
+    totalPrice.html(totalPriceNum.toFixed(2));
+    totalPriceMD.html(totalPriceNum.toFixed(2));
     shopList.length = 0;
     cartNums = 0;
     cartNumsContainer.html(cartNums);
@@ -261,3 +267,28 @@ function afterSubmit() {
   localStorage.setItem("shopList", JSON.stringify(shopList));
 }
 console.log(shopList);
+
+const deleteAll = $("#delete-all");
+const deleteAllTxt = $("#delete-all-txt");
+
+deleteAll.mousemove(function () {
+  deleteAllTxt.css("display", "flex");
+});
+
+deleteAll.mouseleave(function () {
+  deleteAllTxt.css("display", "none");
+});
+
+deleteAll.click(function () {
+  totalGoods = 0;
+  totalPriceNum = 0;
+
+  goodsNums.html(totalGoods);
+  totalPrice.html(totalPriceNum.toFixed(2));
+  totalPriceMD.html(totalPriceNum.toFixed(2));
+  shopList.length = 0;
+  cartNums = 0;
+  cartNumsContainer.html(cartNums);
+  localStorage.clear();
+  showCart();
+});
