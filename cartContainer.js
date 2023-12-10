@@ -1,4 +1,4 @@
-const shopList = JSON.parse(localStorage.getItem("shopList")) || [];
+let shopList = JSON.parse(localStorage.getItem("shopList")) || [];
 
 const cartNumsContainer = $("#cart-nums");
 const addProducts = $(".add-products");
@@ -88,12 +88,6 @@ showCart();
 
 $("body").keypress(function (e) {
   if (e.key === "e" || e.key === "E") {
-    totalGoods = 0;
-    totalPriceNum = 0;
-
-    goodsNums.html(totalGoods);
-    totalPrice.html(totalPriceNum.toFixed(2));
-    totalPriceMD.html(totalPriceNum.toFixed(2));
     shopList.length = 0;
     cartNums = 0;
     cartNumsContainer.html(cartNums);
@@ -108,16 +102,21 @@ shopForm.submit(function (e) {
     e.preventDefault();
   } else if (!inputCheckk()) {
     alert("Please choose");
+    e.preventDefault();
   } else {
+    $("body").addClass("md:overflow-hidden");
     afterSubmit();
-    $("body").addClass("overflow-hidden");
     notifShop.removeClass("hidden");
     e.preventDefault();
+
+    setTimeout(function () {
+      location.reload();
+    }, 2000);
   }
 });
 
 $("#close-notif").click(function () {
-  $("body").removeClass("overflow-hidden");
+  $("body").removeClass("md:overflow-hidden");
   notifShop.addClass("hidden");
 });
 
@@ -238,6 +237,7 @@ function afterSubmit() {
 
   const goodsCheckArr = Array.from(goodsCheck);
 
+  const shopCopy = [...shopList];
   const choosenIndex = goodsCheckArr.reduce((acc, checkBox, index) => {
     if (checkBox.checked) {
       acc.push(index);
@@ -248,23 +248,23 @@ function afterSubmit() {
 
   let i = 0;
   choosenIndex.forEach((num) => {
-    shopList.splice(num - i, 1);
+    shopCopy.splice(num - i, 1);
     shopCard[num].remove();
     cartNums -= shopList[num].count;
     i++;
   });
-  cartNumsContainer.html(cartNums);
-
-  totalGoods = 0;
-  totalPriceNum = 0;
-
-  goodsNums.html(totalGoods);
-  totalPrice.html(totalPriceNum.toFixed(2));
-  totalPriceMD.html(totalPriceNum.toFixed(2));
+  shopList = shopCopy;
   console.log(shopList);
 
-  localStorage.setItem("cartNums", JSON.stringify(cartNums));
+  totalGoods = 0;
+  goodsNums.html(totalGoods);
+  totalPriceNum = 0;
+  totalPrice.html(totalPriceNum.toFixed(2));
+  totalPriceMD.html(totalPriceNum.toFixed(2));
+  cartNumsContainer.html(cartNums);
+
   localStorage.setItem("shopList", JSON.stringify(shopList));
+  localStorage.setItem("cartNums", JSON.stringify(cartNums));
 }
 console.log(shopList);
 

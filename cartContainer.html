@@ -24,7 +24,7 @@
     <title>Cart List</title>
 </head>
 
-<body class="h-screen">
+<body class="relative h-screen overflow-hidden md:overflow-visible">
     <section class="relative h-full">
         <header class="fixed z-10 top-0 left-0 w-full flex-col-reverse md:flex-col flex duration-1000">
             <!--================= Location =================-->
@@ -58,16 +58,16 @@
                     <h1 class="text-black font-bold tracking-wider text-2xl">SHOP LIST</h1>
                 </div>
 
-                <div class="flex relative items-center justify-between">
-                    <div>
-                        <input type="checkbox" id="select-all">
-                        <label for="select-all" class="text-black">Select All</label>
-                    </div>
-                    <div id="delete-all" class="mr-4 cursor-pointer relative">
+                <div class="flex relative items-center gap-3">
+                    <div id="delete-all" class="cursor-pointer relative">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
                           </svg>
-                          <p id="delete-all-txt" class="hidden translate-x-[-100%] translate-y-[-200%] text-black absolute w-max text-[10px]">Click here or press "e" in your keyboard to clear your shop list</p>
+                          <p id="delete-all-txt" class="hidden translate-x-[10%] translate-y-[-200%] text-black absolute w-max text-[10px]">Click here or press "e" in your keyboard to clear your shop list</p>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="select-all">
+                        <label for="select-all" class="text-black">Select All</label>
                     </div>
                 </div>
 
@@ -105,27 +105,28 @@
                 </button>
             </div>
         </section>
-    </section>
 
-    <section id="notif-shop" class="bg-black/[.7] w-full h-full absolute z-10 top-0 left-0 bottom-0 flex justify-center items-center hidden">
-        <div class="mx-11 my-8 shadow-[0_0_10px_rgba(0,0,0,0.3)] p-8 rounded-xl border-[1px] border-solid flex justify-center md:w-[90%] bg-white flex-col items-center gap-5">
-
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="var(--fourth)" class="bi bi-check-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
-                  </svg>
+        <section id="notif-shop" class="bg-black/[.7] fixed w-full h-full z-10 top-0 left-0 bottom-0 flex justify-center items-center hidden">
+            <div class="mx-11 my-8 shadow-[0_0_10px_rgba(0,0,0,0.3)] p-8 rounded-xl border-[1px] border-solid flex justify-center md:w-[90%] md:max-w-[70%] bg-white flex-col items-center gap-5">
+    
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="var(--fourth)" class="bi bi-check-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                      </svg>
+                </div>
+    
+                <div>
+                    <p class="text-black font-medium">Thank you for your messages,we appriciate it!</p>
+                </div>
+                
+                <div>
+                    <button id="close-notif" class="bg-slate-700 px-3 py-1 rounded-lg text-medium tracking-wide">Close</button>
+                </div>
+    
             </div>
-
-            <div>
-                <p class="text-black font-medium">Thank you for your messages,we appriciate it!</p>
-            </div>
-            
-            <div>
-                <button id="close-notif" class="bg-slate-700 px-3 py-1 rounded-lg text-medium tracking-wide">Close</button>
-            </div>
-
-        </div>
+        </section>
+    
     </section>
 
     <script src="cartContainer.js"></script>
