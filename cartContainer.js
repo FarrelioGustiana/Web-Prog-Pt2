@@ -9,7 +9,9 @@ const shopForm = $("#shoplist-container");
 const totalPrice = $("#the-total");
 const totalPriceMD = $("#total-price-md");
 const notifShop = $("#notif-shop");
+const goodsNums = $("#goods-nums");
 
+let totalGoods = 0;
 let totalPriceNum = 0;
 let cartNums = localStorage.getItem("cartNums") || 0;
 cartNumsContainer.html(cartNums);
@@ -66,14 +68,17 @@ function showCart() {
   goodsCheck.forEach((check) => {
     check.addEventListener("change", () => {
       let total = 0;
+      totalGoods = 0;
       for (i = 0; i < goodsCheck.length; i++) {
         const { price, count } = shopList[i];
         if (goodsCheck[i].checked) {
           const recent = price * count;
+          totalGoods += parseInt(count);
           total += recent;
         }
       }
       totalPriceNum = total;
+      goodsNums.html(totalGoods);
       totalPrice.html(totalPriceNum.toFixed(2));
       totalPriceMD.html(totalPriceNum.toFixed(2));
     });
@@ -95,7 +100,10 @@ shopForm.submit(function (e) {
   if (!submitShould) {
     submitShould = true;
     e.preventDefault();
+  } else if (!inputCheckk()) {
+    alert("Please choose");
   } else {
+    afterSubmit();
     $("body").addClass("overflow-hidden");
     notifShop.removeClass("hidden");
     e.preventDefault();
@@ -171,6 +179,8 @@ function cartList() {
       localStorage.setItem("shopList", JSON.stringify(shopList));
       localStorage.setItem("cartNums", JSON.stringify(cartNums));
       if (goodsCheck.prop("checked")) {
+        totalGoods++;
+        goodsNums.html(totalGoods);
         totalPriceNum += parseFloat(list.price);
         totalPrice.html(totalPriceNum.toFixed(2));
         totalPriceMD.html(totalPriceNum.toFixed(2));
@@ -181,6 +191,8 @@ function cartList() {
       submitShould = false;
       list.count--;
       cartNums--;
+      totalGoods--;
+      goodsNums.html(totalGoods);
       cartNumsContainer.html(cartNums);
       showCount.html(list.count);
 
@@ -204,3 +216,48 @@ function cartList() {
     });
   });
 }
+
+function inputCheckk() {
+  let result = false;
+  const goodsCheck = document.querySelectorAll(".goods-check");
+  goodsCheck.forEach((check) => {
+    if (check.checked) result = true;
+  });
+  return result;
+}
+
+function afterSubmit() {
+  const shopCard = document.querySelectorAll(".shop-card");
+  const goodsCheck = document.querySelectorAll(".goods-check");
+
+  const goodsCheckArr = Array.from(goodsCheck);
+
+  const choosenIndex = goodsCheckArr.reduce((acc, checkBox, index) => {
+    if (checkBox.checked) {
+      acc.push(index);
+    }
+
+    return acc;
+  }, []);
+
+  let i = 0;
+  choosenIndex.forEach((num) => {
+    shopList.splice(num - i, 1);
+    shopCard[num].remove();
+    cartNums -= shopList[num].count;
+    i++;
+  });
+  cartNumsContainer.html(cartNums);
+
+  totalGoods = 0;
+  totalPriceNum = 0;
+
+  goodsNums.html(totalGoods);
+  totalPrice.html(totalPriceNum.toFixed(2));
+  totalPriceMD.html(totalPriceNum.toFixed(2));
+  console.log(shopList);
+
+  localStorage.setItem("cartNums", JSON.stringify(cartNums));
+  localStorage.setItem("shopList", JSON.stringify(shopList));
+}
+console.log(shopList);
