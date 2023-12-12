@@ -76,3 +76,12 @@
   background-color: var(--fourth);
   border-radius: 50px;
 }
+
+.about-container {
+  background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url(photo/repyok.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: auto;
+}
