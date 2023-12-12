@@ -10,6 +10,7 @@ const totalPrice = $("#the-total");
 const totalPriceMD = $("#total-price-md");
 const notifShop = $("#notif-shop");
 const goodsNums = $("#goods-nums");
+const selectAll = document.getElementById("select-all");
 
 let totalGoods = 0;
 let totalPriceNum = 0;
@@ -65,25 +66,7 @@ function showCart() {
 
   cartList();
 
-  const goodsCheck = document.querySelectorAll(".goods-check");
-  goodsCheck.forEach((check) => {
-    check.addEventListener("change", () => {
-      let total = 0;
-      totalGoods = 0;
-      for (i = 0; i < goodsCheck.length; i++) {
-        const { price, count } = shopList[i];
-        if (goodsCheck[i].checked) {
-          const recent = price * count;
-          totalGoods += parseInt(count);
-          total += recent;
-        }
-      }
-      totalPriceNum = total;
-      goodsNums.html(totalGoods);
-      totalPrice.html(totalPriceNum.toFixed(2));
-      totalPriceMD.html(totalPriceNum.toFixed(2));
-    });
-  });
+  inpCheckk();
 }
 showCart();
 
@@ -294,8 +277,6 @@ deleteAll.click(function () {
   showCart();
 });
 
-const selectAll = document.getElementById("select-all");
-
 selectAll.addEventListener("click", selectAllClick);
 
 function selectAllClick() {
@@ -303,15 +284,73 @@ function selectAllClick() {
 
   if (selectAll.checked) {
     let total = 0;
+    let goods = 0;
     goodsCheck.forEach((checkBox, index) => {
       checkBox.checked = selectAll.checked;
       const { count, price } = shopList[index];
       if (checkBox.checked) {
         const recent = parseFloat(count * price);
-
         total += recent;
+        goods += parseInt(count);
       }
     });
     totalPriceNum = total;
+    totalGoods = goods;
+    goodsNums.html(totalGoods);
+    totalPrice.html(totalPriceNum.toFixed(2));
+    totalPriceMD.html(totalPriceNum.toFixed(2));
+  } else {
+    let total = 0;
+    let goods = 0;
+    goodsCheck.forEach((checkBox, index) => {
+      checkBox.checked = selectAll.checked;
+      const { count, price } = shopList[index];
+      if (checkBox.checked) {
+        const recent = parseFloat(count * price);
+        total += recent;
+        goods += parseInt(count);
+      }
+    });
+    totalPriceNum = total;
+    totalGoods = goods;
+    goodsNums.html(totalGoods);
+    totalPrice.html(totalPriceNum.toFixed(2));
+    totalPriceMD.html(totalPriceNum.toFixed(2));
   }
+}
+
+function selectAllAuto() {
+  const goodsCheck = document.querySelectorAll(".goods-check");
+
+  let allInputChecked = true;
+  goodsCheck.forEach((checkbox) => {
+    if (!checkbox.checked) allInputChecked = false;
+  });
+
+  selectAll.checked = allInputChecked;
+}
+
+function inpCheckk() {
+  const goodsCheck = document.querySelectorAll(".goods-check");
+
+  goodsCheck.forEach((check) => {
+    check.addEventListener("change", () => {
+      let total = 0;
+      totalGoods = 0;
+      for (i = 0; i < goodsCheck.length; i++) {
+        const { price, count } = shopList[i];
+        if (goodsCheck[i].checked) {
+          const recent = price * count;
+          totalGoods += parseInt(count);
+          total += recent;
+        }
+      }
+      totalPriceNum = total;
+      goodsNums.html(totalGoods);
+      totalPrice.html(totalPriceNum.toFixed(2));
+      totalPriceMD.html(totalPriceNum.toFixed(2));
+
+      selectAllAuto();
+    });
+  });
 }
