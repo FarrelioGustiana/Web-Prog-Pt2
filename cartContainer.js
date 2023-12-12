@@ -64,6 +64,7 @@ function showCart() {
   }
 
   cartList();
+
   const goodsCheck = document.querySelectorAll(".goods-check");
   goodsCheck.forEach((check) => {
     check.addEventListener("change", () => {
@@ -293,13 +294,24 @@ deleteAll.click(function () {
   showCart();
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const selectAll = document.getElementById("select-all");
-  const goodsCheckboxes = document.querySelectorAll(".goods-check");
+const selectAll = document.getElementById("select-all");
 
-  selectAll.addEventListener("click", function () {
-    goodsCheckboxes.forEach((checkbox) => {
-      checkbox.checked = selectAll.checked;
+selectAll.addEventListener("click", selectAllClick);
+
+function selectAllClick() {
+  const goodsCheck = document.querySelectorAll(".goods-check");
+
+  if (selectAll.checked) {
+    let total = 0;
+    goodsCheck.forEach((checkBox, index) => {
+      checkBox.checked = selectAll.checked;
+      const { count, price } = shopList[index];
+      if (checkBox.checked) {
+        const recent = parseFloat(count * price);
+
+        total += recent;
+      }
     });
-  });
-});
+    totalPriceNum = total;
+  }
+}
