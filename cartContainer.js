@@ -292,3 +292,14 @@ deleteAll.click(function () {
   localStorage.clear();
   showCart();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const selectAll = document.getElementById("select-all");
+  const goodsCheckboxes = document.querySelectorAll(".goods-check");
+
+  selectAll.addEventListener("click", function () {
+    goodsCheckboxes.forEach((checkbox) => {
+      checkbox.checked = selectAll.checked;
+    });
+  });
+});

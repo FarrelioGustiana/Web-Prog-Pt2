@@ -45,10 +45,10 @@ function reloadSlider() {
   for (i = 0; i < slideDots.length; i++) {
     slideDots[i].classList.remove("active");
   }
+  console.log(checkk);
 
   slideDots[slideAct].classList.add("active");
   if (slideAutoId) clearInterval(slideAutoId);
   slideAutoId = setInterval(nextSlide, 2000);
 }
-
 reloadSlider();
