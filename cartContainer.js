@@ -106,11 +106,6 @@ shopForm.submit(function (e) {
   }
 });
 
-$("#close-notif").click(function () {
-  $("body").removeClass("md:overflow-hidden");
-  notifShop.addClass("hidden");
-});
-
 function cartList() {
   shopList.forEach((list, index) => {
     const { name, price, img, count } = list;
