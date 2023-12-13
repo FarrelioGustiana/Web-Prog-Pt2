@@ -81,6 +81,7 @@ $("body").keypress(function (e) {
     shopList.length = 0;
     cartNums = 0;
     cartNumsContainer.html(cartNums);
+    selectAll.checked = false;
     localStorage.clear();
     showCart();
   }
@@ -279,6 +280,7 @@ deleteAll.click(function () {
   shopList.length = 0;
   cartNums = 0;
   cartNumsContainer.html(cartNums);
+  selectAll.checked = false;
   localStorage.clear();
   showCart();
 });
