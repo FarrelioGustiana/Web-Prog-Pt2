@@ -72,6 +72,12 @@ showCart();
 
 $("body").keypress(function (e) {
   if (e.key === "e" || e.key === "E") {
+    totalGoods = 0;
+    totalPriceNum = 0;
+
+    goodsNums.html(totalGoods);
+    totalPrice.html(totalPriceNum.toFixed(2));
+    totalPriceMD.html(totalPriceNum.toFixed(2));
     shopList.length = 0;
     cartNums = 0;
     cartNumsContainer.html(cartNums);
