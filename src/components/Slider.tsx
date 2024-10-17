@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
 const Slider = () => {
 	const slideImages = [imgslide1, imgslide2, imgslide3, imgslide4];
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-	const slideContainer = useRef(null);
+	const slideContainer = useRef<HTMLDivElement>(null);
+	const slideAutoIdRef = useRef<NodeJS.Timeout | null>(null);
 
 	const nextSlide = () => {
 		setCurrentIndex((prevIndex) => (prevIndex + 1) % slideImages.length);
@@ -22,11 +22,35 @@ const Slider = () => {
 		);
 	};
 
-	useEffect(() => {}, []);
+	const goToSlide = (index: number) => {
+		setCurrentIndex(index);
+	};
+
+	const reloadSlider = () => {
+		if (slideContainer.current) {
+			const checkk = (
+				slideContainer.current.children[currentIndex] as HTMLElement
+			)?.offsetLeft;
+			slideContainer.current.style.left = `-${checkk}px`;
+		}
+
+		if (slideAutoIdRef.current) clearInterval(slideAutoIdRef.current);
+		slideAutoIdRef.current = setInterval(nextSlide, 2000);
+	};
+
+	useEffect(() => {
+		reloadSlider();
+		return () => {
+			if (slideAutoIdRef.current) clearInterval(slideAutoIdRef.current);
+		};
+	}, [currentIndex]);
 
 	return (
 		<div className="relative mx-11 my-8 w-sm sm:w-md md:w-lg rounded-xl h-[240px] lg:h-[450px] overflow-hidden duration-1000">
-			<div className="absolute top-0 h-full w-max duration-1000 flex">
+			<div
+				ref={slideContainer}
+				className="absolute top-0 h-full w-max duration-1000 flex"
+			>
 				{slideImages.map((image, i) => (
 					<div key={i}>
 						<img
@@ -58,11 +82,15 @@ const Slider = () => {
 				{slideImages.map((_, i) => (
 					<span
 						key={i}
-						className="duration-1000 w-[12px] h-[12px] bg-white/[.5] inline-flex rounded-full cursor-pointer active"
+						onClick={() => goToSlide(i)}
+						className={`duration-1000 w-[12px] h-[12px] bg-white/[.5] inline-flex rounded-full cursor-pointer ${
+							i === currentIndex ? "active bg-white" : ""
+						}`}
 					></span>
 				))}
 			</div>
 		</div>
 	);
 };
+
 export default Slider;
