@@ -83,8 +83,8 @@ const Slider = () => {
 					<span
 						key={i}
 						onClick={() => goToSlide(i)}
-						className={`duration-1000 w-[12px] h-[12px] bg-white/[.5] inline-flex rounded-full cursor-pointer ${
-							i === currentIndex ? "active bg-white" : ""
+						className={`duration-1000 w-[12px] h-[12px]  inline-flex rounded-full cursor-pointer ${
+							i === currentIndex ? "bg-white" : "bg-white/60"
 						}`}
 					></span>
 				))}

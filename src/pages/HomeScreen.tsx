@@ -1,11 +1,14 @@
 import Header from "@components/Header";
-import Recomendation from "@components/Recomendation";
+import Recommendation from "@components/Recomendation";
 
 const HomeScreen = () => {
 	return (
-		<div>
+		<div className="pb-5">
 			<Header />
-			<Recomendation />
+
+			<main className="mx-11 mt-9 flex flex-col gap-8">
+				<Recommendation />
+			</main>
 		</div>
 	);
 };
