@@ -1,5 +1,5 @@
 import { signUp, signUpWithGoogle } from "@/lib/firebaseFunc";
-import AuthForm from "@components/AuthForm";
+import AuthForm from "@components/auth/AuthForm";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";

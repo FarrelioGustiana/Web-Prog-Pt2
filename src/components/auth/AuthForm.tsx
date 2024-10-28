@@ -1,6 +1,6 @@
 import googleImg from "@assets/images/google.png";
 import facebookImg from "@assets/images/facebook.png";
-import AuthInput from "@components/AuthInput";
+import AuthInput from "@components/auth/AuthInput";
 
 type AuthFormProps = {
 	type: string;

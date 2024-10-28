@@ -21,6 +21,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"baseUrl": ".",
 		"paths": {
+			"@lib/*": ["src/lib/*"],
 			"@assets/*": ["src/assets/*"],
 			"@components/*": ["src/components/*"],
 			"@pages/*": ["src/pages/*"],

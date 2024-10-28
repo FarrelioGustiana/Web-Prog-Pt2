@@ -1,5 +1,5 @@
-import Header from "@components/Header";
-import Recommendation from "@components/Recomendation";
+import Header from "@components/homeScreen/Header";
+import Recommendation from "@components/homeScreen/Recomendation";
 
 const HomeScreen = () => {
 	return (

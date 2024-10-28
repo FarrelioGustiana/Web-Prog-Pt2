@@ -1,4 +1,5 @@
-import Searchinput from "@components/Searchinput";
+import Searchinput from "@components/homeScreen/Searchinput";
+import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -20,15 +21,12 @@ const Navbar = () => {
 			</div>
 			<div className="flex items-center md:w-full flex-1">
 				<Searchinput />
-				<div className="cursor-pointer relative ml-2 flex items-center justify-center">
+				<div className="cursor-pointer relative ml-4 flex items-center justify-center">
 					<Link
-						to="#"
-						className="flex items-center justify-center relative"
+						to="/cart"
+						className="flex items-center justify-center relative hover:bg-primary/20 active:bg-primary/40 transition-all duration-500 p-2 rounded-full"
 					>
-						<FaShoppingCart size={38} />
-						<p className="text-fourth text-sm font-medium text-center -mt-[15%] -ml-[44%]">
-							{cartCount}
-						</p>
+						<ShoppingCart size={28} />
 					</Link>
 				</div>
 				<div className="signIn-button hidden md:inline-flex md:w-[110px] md:justify-center">

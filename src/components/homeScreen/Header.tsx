@@ -1,5 +1,5 @@
-import Navbar from "@components/Navbar";
-import Slider from "@components/Slider";
+import Navbar from "@components/homeScreen/Navbar";
+import Slider from "@components/homeScreen/Slider";
 
 const Header = () => {
 	return (
