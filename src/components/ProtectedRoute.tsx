@@ -1,20 +1,11 @@
-import { auth } from "@/config/firebase";
 import useUserStore from "@lib/useUserStore";
-import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
-	const { currentUser, fetchUserInfo } = useUserStore();
-	useEffect(() => {
-		const unSub = onAuthStateChanged(auth, (user) => {
-			fetchUserInfo(user?.uid as string);
-		});
+	const { currentUser, isLoading } = useUserStore();
 
-		return () => {
-			unSub();
-		};
-	}, [fetchUserInfo]);
-	return currentUser ? <Outlet /> : <Navigate to="/login" replace />;
+	if (!isLoading && !currentUser) return <Navigate to="/login" />;
+
+	if (!isLoading && currentUser) return <Outlet />;
 };
 export default ProtectedRoute;

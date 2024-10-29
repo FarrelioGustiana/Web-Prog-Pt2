@@ -26,7 +26,10 @@ const SignIn = () => {
 				navigate("/home");
 				return `Login Succeed! Welcome back ${username.split(" ")[0]}!`;
 			},
-			error: (err: Error) => err.message,
+			error: (err: Error) => {
+				console.log(err);
+				return err.message;
+			},
 			finally: () => {
 				setIsLoading(false);
 				setTimeout(() => toast.dismiss(this), 1000);

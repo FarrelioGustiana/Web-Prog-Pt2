@@ -64,44 +64,48 @@ const SignUp = () => {
 				return "Account Created!";
 			},
 			error: (err: Error) => err.message,
-			finally: () => setIsLoading(false),
+			finally: () => {
+				setIsLoading(false);
+			},
 		});
 	};
 
 	return (
-		<div className="relative flex flex-col items-center justify-center p-2 py-10">
-			<div className="title-container flex justify-center items-center flex-col gap-4">
-				<h1 className="title font-bold text-2xl tracking-[2px]">
-					BLUESHOP.COM
-				</h1>
-				<p className="font-bold text-lg">Welcome!</p>
-			</div>
+		<>
+			<div className="relative flex flex-col items-center justify-center p-2 py-10">
+				<div className="title-container flex justify-center items-center flex-col gap-4">
+					<h1 className="title font-bold text-2xl tracking-[2px]">
+						BLUESHOP.COM
+					</h1>
+					<p className="font-bold text-lg">Welcome!</p>
+				</div>
 
-			<div className="mt-2 flex flex-col items-center">
-				<p className="font-bold mb-2">Create your account</p>
-				<AuthForm
-					type="register"
-					username={username}
-					setUsername={setUsername}
-					email={email}
-					setEmail={setEmail}
-					password={password}
-					setPassword={setPassword}
-					setReEnterPassword={setReEnterPassword}
-					reEnterPassword={reEnterPassword}
-					handleSubmit={register}
-					disabled={isLoading}
-					withGoogle={registerWithGoogle}
-				/>
-			</div>
+				<div className="mt-2 flex flex-col items-center">
+					<p className="font-bold mb-2">Create your account</p>
+					<AuthForm
+						type="register"
+						username={username}
+						setUsername={setUsername}
+						email={email}
+						setEmail={setEmail}
+						password={password}
+						setPassword={setPassword}
+						setReEnterPassword={setReEnterPassword}
+						reEnterPassword={reEnterPassword}
+						handleSubmit={register}
+						disabled={isLoading}
+						withGoogle={registerWithGoogle}
+					/>
+				</div>
 
-			<p className="mt-6">
-				Already have account?{" "}
-				<Link to="/login" className="text-sky-800 underline">
-					Sign In here!
-				</Link>
-			</p>
-		</div>
+				<p className="mt-6">
+					Already have account?{" "}
+					<Link to="/login" className="text-sky-800 underline">
+						Sign In here!
+					</Link>
+				</p>
+			</div>
+		</>
 	);
 };
 export default SignUp;

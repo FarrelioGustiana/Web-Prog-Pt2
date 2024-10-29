@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSwipeable } from "react-swipeable";
 import RecommendCard from "@components/homeScreen/RecommendCard";
+import { Link } from "react-router-dom";
 
 export default function Recommendation() {
 	const [scrollPosition, setScrollPosition] = useState(0);
@@ -36,22 +37,26 @@ export default function Recommendation() {
 	}, []);
 
 	return (
-		<div className="w-full  py-8">
-			<h2 className="font-bold text-2xl md:text-3xl tracking-wide mb-6">
-				Recommendations
+		<div className="w-full py-8">
+			<h2 className="font-bold text-2xl md:text-3xl tracking-wide mb-1 text-fourth">
+				Recommendation
 			</h2>
 
 			<div className="relative" {...handlers}>
 				<div
 					ref={containerRef}
-					className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-8 pb-4"
+					className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-8 py-9 px-4"
 				>
 					{Array(recommendationCount)
 						.fill("")
 						.map((_, index) => (
-							<div key={index} className="snap-start shrink-0">
+							<Link
+								to="/product/:productId"
+								key={index}
+								className="snap-start shrink-0 cursor-pointer"
+							>
 								<RecommendCard />
-							</div>
+							</Link>
 						))}
 				</div>
 

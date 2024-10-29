@@ -46,7 +46,7 @@ const Slider = () => {
 	}, [currentIndex]);
 
 	return (
-		<div className="relative mx-11 my-8 w-sm sm:w-md md:w-lg rounded-xl h-[240px] lg:h-[450px] overflow-hidden duration-1000">
+		<div className="relative mx-11 my-8 w-sm sm:w-md md:w-lg rounded-xl h-[240px] lg:h-[340px] overflow-hidden duration-500">
 			<div
 				ref={slideContainer}
 				className="absolute top-0 h-full w-max duration-1000 flex"

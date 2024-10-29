@@ -1,7 +1,12 @@
 import { ShoppingCart } from "lucide-react";
 import slideOne from "@assets/images/slide1.jpg";
+import useUserStore from "@lib/useUserStore";
+import { useNavigate } from "react-router-dom";
 
 const RecommendCard = () => {
+	const navigate = useNavigate();
+	const { currentUser } = useUserStore();
+
 	return (
 		<div className="w-[250px] bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg">
 			<div className="relative">
@@ -15,7 +20,16 @@ const RecommendCard = () => {
 				</p>
 				<div className="flex items-center justify-between">
 					<span className="text-lg font-semibold">$148.99</span>
-					<button className="bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-colors duration-300 hover:bg-blue-700">
+					<button
+						className="bg-third text-white px-3 py-2 rounded-lg text-sm font-medium flex items-center transition-colors duration-300 hover:bg-third/80"
+						onClick={() => {
+							if (currentUser) {
+								// Add to cart firebase logic
+							} else {
+								navigate("/login");
+							}
+						}}
+					>
 						<ShoppingCart className="mr-2 h-4 w-4" />
 						Add to Cart
 					</button>
