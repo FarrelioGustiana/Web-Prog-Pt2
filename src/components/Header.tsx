@@ -67,18 +67,21 @@ export default function Header() {
 									</button>
 								</Link>
 							) : (
-								<div className="block overflow-hidden">
+								<Link
+									to="/profile"
+									className="block overflow-hidden hover:opacity-80 transition-opacity"
+								>
 									{currentUser?.avatar ? (
 										<img
-											src={currentUser.avatar}
-											className="w-10 h-10 rounded-full"
+											src={currentUser?.avatar as string}
+											className="w-10 h-10 rounded-full object-cover"
 										/>
 									) : (
 										<div className="w-10 h-10 rounded-full bg-[#E8F1F5] flex items-center justify-center">
 											<User className="h-6 w-6 text-[#005691]" />
 										</div>
 									)}
-								</div>
+								</Link>
 							)}
 						</div>
 					</div>

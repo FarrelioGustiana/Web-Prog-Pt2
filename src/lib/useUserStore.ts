@@ -2,12 +2,21 @@ import { db } from "@/config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { create } from "zustand";
 
+type Product = {
+	id: number;
+	name: string;
+	price: number;
+	image: string | File;
+};
+
 export type User = {
 	username: string;
 	id: string;
 	email: string;
 	isAdmin?: boolean;
-	avatar?: string;
+	avatar?: string | File;
+	location?: string;
+	products?: Product[];
 };
 
 export type UserStoreState = {
@@ -35,8 +44,8 @@ const useUserStore = create<UserStoreState>((set) => ({
 				set({ currentUser: null, isLoading: false });
 			}
 		} catch (error) {
-			console.log(error);
 			set({ currentUser: null, isLoading: false });
+			throw error as Error;
 		}
 	},
 }));

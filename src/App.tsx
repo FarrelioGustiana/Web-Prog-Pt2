@@ -5,8 +5,10 @@ import useUserStore from "@lib/useUserStore";
 import SignIn from "@pages/auth/SignIn";
 import SignUp from "@pages/auth/SignUp";
 import Cart from "@pages/Cart";
+import EditProfile from "@pages/EditProfile";
 import HomeScreen from "@pages/HomeScreen";
 import ProductDetail from "@pages/ProductDetail";
+import Profile from "@pages/Profile";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { createRoutesFromElements, Route, RouterProvider } from "react-router";
@@ -16,16 +18,20 @@ import { Toaster } from "sonner";
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route>
-			<Route path="" element={<WithNavRoute />}>
+			<Route path="/" element={<WithNavRoute />}>
 				<Route path="/home" element={<HomeScreen />} />
 				<Route path="/product/:productId" element={<ProductDetail />} />
 				<Route path="/" element={<Navigate to="/home" />} />
+
+				{/* Protected Routes */}
+				<Route path="" element={<ProtectedRoute />}>
+					<Route path="/cart" element={<Cart />} />
+					<Route path="/profile" element={<Profile />} />s
+					<Route path="/editProfile" element={<EditProfile />} />
+				</Route>
 			</Route>
 
-			<Route path="" element={<ProtectedRoute />}>
-				<Route path="/cart" element={<Cart />} />
-			</Route>
-
+			{/* Public Routes */}
 			<Route path="/login" element={<SignIn />} />
 			<Route path="/register" element={<SignUp />} />
 		</Route>
